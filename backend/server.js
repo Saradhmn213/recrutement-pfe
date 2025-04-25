@@ -1,61 +1,49 @@
-// server.js
-import express from 'express';
-import mongoose from 'mongoose';
-import User from './models/User.js'; // Assure-toi d'importer ton modèle User
-import bcrypt from 'bcryptjs'; // Pour sécuriser les mots de passe
-import jwt from 'jsonwebtoken'; // Pour créer un token d'authentification
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const { json, urlencoded } = require("express");
+const cors = require("cors");
+
+const User = require("./models/user");
+const GenericController = require("./controllers/genericController");
+const GenericService = require("./services/genericServices");
+
+const authRouter = require("./routes/authRoutes");
+const GenericRouter = require("./routes/genericRouter");
+
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Connexion à MongoDB
-mongoose
-  .connect('mongodb://localhost:27017/pfe', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
   })
-  .then(() => console.log('✅ Connexion à MongoDB réussie'))
-  .catch((err) => console.error('❌ Erreur de connexion MongoDB :', err));
+);
+app.use(express.json());
+app.use(json());
 
-app.use(express.json()); // Middleware pour parser le JSON
+// User
+const userService = new GenericService(User);
+const userController = new GenericController(userService);
+const userRouter = new GenericRouter(userController).getRouter();
 
-// Route d'inscription
-app.post('/api/register', async (req, res) => {
-  const { nom, email, password, role } = req.body;
+app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 
-  try {
-    // Vérification si l'utilisateur existe déjà
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Cet email est déjà utilisé.' });
-    }
+// Connexion à la BDD MongoDB
+mongoose
+  .connect(process.env.MONGO_URI, {})
+  .then(() => console.log("Connexion à MongoDB réussie !"))
+  .catch((err) => console.error("Erreur de connexion à MongoDB:", err));
 
-    // Hashage du mot de passe
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Création de l'utilisateur
-    const newUser = new User({
-      nom,
-      email,
-      password: hashedPassword,
-      role,
-    });
-
-    // Enregistrement de l'utilisateur dans la base de données
-    await newUser.save();
-
-    // Création d'un token JWT pour la session (optionnel, pour l'authentification)
-    const token = jwt.sign({ userId: newUser._id }, 'votre_clé_secrète', { expiresIn: '1h' });
-
-    // Retourne la réponse avec le rôle de l'utilisateur
-    res.status(201).json({ message: 'Utilisateur inscrit avec succès', role: newUser.role, token });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Erreur serveur' });
-  }
+app.get("/", (req, res) => {
+  res.send("Bienvenue sur l'API !");
 });
 
 // Démarrage du serveur
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Serveur démarré sur le port ${PORT}`);
 });
