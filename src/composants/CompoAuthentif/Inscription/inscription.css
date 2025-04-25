@@ -1,0 +1,524 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1; /* utile si nécessaire */
+  padding: 150px 20px 20px 20px !important;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #2e2e2e, #5ABCDE); /* Gris anthracite & Bleu clair */
+  color: white;
+ }
+ 
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container h2 {
+  font-size: 2rem;
+  color: #0c0a0a;
+  margin-bottom: 1rem;
+}
+
+.role-selection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Centrer verticalement */
+  height: 100vh; /* S'assurer que l'élément prend toute la hauteur de la page */
+}
+
+.role-selection h2{
+  font-size: 2rem;
+  color: #f5eeee;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.role-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centrer verticalement */
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.role-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+  width: 240px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+  margin: 0 auto;
+}
+
+.role-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.role-card img {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+}
+
+
+/* Formulaire */
+.form-container {
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+  max-width: 500px;
+  margin: 0 auto; /* ✅ pas de margin-top ici */
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.required-field-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Style des champs de saisie */
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 2px solid #5ABCDE;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.input-group .float-label {
+  position: absolute;
+  left: 40px; /* Espace pour l'icône */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #0c0909;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus ~ .float-label,
+.input-group input:not(:placeholder-shown) ~ .float-label {
+  top: -10px;
+  left: 10px;
+  font-size: 14px !important;
+  color: #1A237E;
+  background: white;
+  padding: 0 4px;
+  transform: translateY(0);
+}
+
+.input-group input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.input-group input::placeholder {
+  color: transparent;
+}
+
+.eye-icon {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #1A237E;
+  font-size: 18px;
+}
+
+.input-group.error {
+  border-color: #ff6b6b; /* Rouge pour indiquer l'erreur */
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  text-align: left;
+  margin: 3px 0 10px 5px;
+  transition: all 0.3s ease;
+}
+
+/* Icônes alignées à gauche */
+.input-group .icon {
+  flex-shrink: 0;
+  margin-right: 10px;
+  font-size: 18px;
+  color: #1A237E;
+}
+
+/* Champs de saisie standard (pour les non-float labels) */
+.input-group select {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  width: 100%;
+}
+
+/* Style pour l'upload de fichier */
+.file-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+
+/* Style pour le bouton d'upload personnalisé */
+.custom-file-upload {
+  border: 2px dashed #5ABCDE;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(90, 188, 222, 0.05);
+  width: 90%;
+  margin-top: 1px;
+  margin-left: 16px;
+}
+
+.custom-file-upload:hover {
+  background-color: rgba(90, 188, 222, 0.1);
+  border-color: #3D7EAA;
+}
+
+.custom-file-upload .upload-icon {
+  font-size: 32px;
+  color: #5ABCDE;
+  margin-bottom: 8px;
+}
+
+.custom-file-upload .upload-text {
+  color: #333;
+  font-size: 14px;
+}
+
+.custom-file-upload .file-selected {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #1A237E;
+  text-align: center;
+}
+
+/* Cacher l'input file par défaut */
+.file-upload-wrapper input[type="file"] {
+  display: none;
+}
+
+/* Placeholder en gris foncé */
+.input-group select {
+  color: #555;
+}
+
+/* Effet focus */
+.input-group:focus-within {
+  border-color: #8fcde4; /* Bordure plus claire au focus */
+  box-shadow: 0 0 8px rgba(90, 188, 222, 0.5);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-container select {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  background: transparent;
+  color: #333;
+  outline: none;
+}
+
+.form-container select {
+  color: #666;
+}
+
+.form-container select:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.button-group button {
+  flex: 1;
+}
+
+.form-container button {
+  background: linear-gradient(135deg, #1A237E, #5ABCDE); /* Vert profond & sauge */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.form-container button:hover {
+  background: linear-gradient(135deg, #5ABCDE, #3D7EAA);
+  box-shadow: 0px 5px 15px rgba(90, 188, 222, 0.5);
+}
+
+.form-container .secondary-button {
+  background: transparent;
+  border: 1px solid #1A237E;
+  color: #1A237E;
+}
+
+.form-container .secondary-button:hover {
+  background: rgba(90, 188, 222, 0.1);
+  box-shadow: none;
+}
+
+.form-container .reset-button {
+  background: linear-gradient(135deg, #6c757d, #495057);
+}
+
+.form-container .reset-button:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  box-shadow: 0px 5px 15px rgba(108, 117, 125, 0.5);
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-5px);
+  background: linear-gradient(135deg, #5ABCDE, #3D7EAA);
+  box-shadow: 0px 5px 15px rgba(90, 188, 222, 0.5);
+}
+
+/* Styles pour les appareils mobiles */
+@media (max-width: 768px) {
+  .role-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+  
+  .back-button {
+    top: 10px;
+    left: 10px;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+}
+/* Styles pour la case à cocher des conditions d'utilisation */
+.terms-checkbox {
+  margin: 15px 0;
+  text-align: left;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #5ABCDE;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked {
+  background-color: #5ABCDE;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-wrapper label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.checkbox-wrapper a {
+  color: #1A237E;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.checkbox-wrapper a:hover {
+  color: #5ABCDE;
+}
+
+/* Styles pour la modal des conditions */
+.terms-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.terms-modal {
+  background: white;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.terms-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.terms-modal-header h3 {
+  margin: 0;
+  color: #1A237E;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.terms-modal-content {
+  padding: 20px;
+  overflow-y: auto;
+  color: #333;
+  flex: 1;
+}
+
+.terms-modal-content h4 {
+  color: #1A237E;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.terms-modal-content p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.terms-modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.accept-terms-btn {
+  background: linear-gradient(135deg, #1A237E, #5ABCDE);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.accept-terms-btn:hover {
+  background: linear-gradient(135deg, #5ABCDE, #3D7EAA);
+  box-shadow: 0 3px 8px rgba(90, 188, 222, 0.4);
+}
+
+/* Style pour l'erreur de la case à cocher */
+.terms-checkbox.error .checkbox-wrapper input[type="checkbox"] {
+  border-color: #ff6b6b;
+}
