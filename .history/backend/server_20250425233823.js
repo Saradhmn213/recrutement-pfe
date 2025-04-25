@@ -6,8 +6,6 @@ const cors = require("cors");
 
 const User = require("./models/user");
 const GenericController = require("./controllers/genericController");
-const GenericService = require("./services/genericServices");
-
 const authRouter = require("./routes/authRoutes");
 const GenericRouter = require("./routes/genericRouter");
 
