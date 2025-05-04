@@ -16,7 +16,7 @@ function Login() {
 		try {
 			const response = await login(email, password);
 			if (response.ok) {
-				navigate("/");
+				navigate("/dashboard");
 			} else {
 				const data = await response.json();
 				setFormError(data?.message || "Email ou mot de passe incorrect");
@@ -83,7 +83,7 @@ function Login() {
 								</button>
 							</div>
 							<p className="mt-2 text-sm leading-6 text-white">
-								Vous n'êtes pas encore inscrit ?
+								Vous n&apos;êtes pas encore inscrit ?
 							</p>
 							<NavLink to="/auth/register">
 								<p className="font-semibold text-white hover:text-bleu">

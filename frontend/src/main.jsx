@@ -1,13 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Root from "./layouts/root.jsx";
-import ErrorPage from "./pages/error-page.jsx";
 import App from "./App.jsx";
+
+import Root from "./layouts/root.jsx";
+import SidebarLayout from "./layouts/SidebarLayout.jsx"
+
+import { UserProvider } from "./hooks/UserProvider.jsx";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/login.jsx";
 import Register from "./pages/register.jsx";
-import { UserProvider } from "./hooks/UserProvider.jsx";
+import ErrorPage from "./pages/error-page.jsx";
+import Dashboard from "./pages/dashboard.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +37,16 @@ const router = createBrowserRouter([
             element: <Register />,
           },
         ],
-      }
+      },
+        {
+        path: "",
+        element: <SidebarLayout />, 
+        children: [
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "profile", element: <Profile /> },
+
+        ],
+      },
     ],
   },
 ]);
